@@ -1,0 +1,78 @@
+/*
+It should have the following qualities:
+
+Distinct layout.
+Color palette.
+Font selections.
+HTML attributes and selectors such as id and class.
+Pseudo-class utilization.
+*/
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    display: grid;
+    /* flex-direction: row; */
+    border: 2px;
+    border-color: black;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: brown;
+    font-family: sans-serif;
+  }
+
+.main {
+    align-items: center;
+    border: black, solid, 2px;
+}
+  .sideText {
+    margin: 2em;
+    margin-bottom: 2em;
+    padding-left: 1em;
+    max-height: 75vh;
+  }
+
+  .sideText h3 {
+    font-weight: initial;
+  }
+  img {
+    /* display: flex; */
+    max-height: 75vh;
+    /* float: right; */
+  }
+  
+  .sites {
+    text-align: center;
+  }
+  
+  .sites div {
+    font-family: 'Times New Roman', Times, serif;    
+    display: grid;
+    grid-template-columns: 1fr, 1fr, 1fr, 1fr;
+    grid-template-rows: 1fr;
+    border: 2px, black, solid;
+    padding: 0;
+    padding-top: 1em;
+  }
+
+  .sites a {
+    color: darkred;
+    text-decoration: none;
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+  .goal {
+    text-align: center;
+    width: 20em;
+    padding-bottom: 2em;
+  }
+  .goal h3 {
+    font-weight: initial;
+  }
+  .sites a:hover {
+    color: yellow;
+  }
+  .sites a:focus {
+    color: yellow;
+  }

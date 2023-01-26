@@ -1,0 +1,88 @@
+body {
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    text-align: center;
+    user-select: none;
+}
+
+header {
+    font-size: 8vh;
+    margin-top: 3rem;
+}
+
+button {
+    border-radius: .5em;
+    width: 4.5em;
+    height: 1.75em;
+    border-color: lightgray;
+    color: white;
+    background-color: rgb(87, 87, 87);
+}
+button:hover {
+    background-color: rgb(128, 128, 128);
+}
+
+button:active {
+    background-color: rgb(87, 87, 87);
+}
+
+#homePage {
+    color: black;
+    background-color: antiquewhite;
+    text-shadow: none;
+}
+
+#aboutPage {
+    background-color: rgb(28, 139, 102);
+}
+
+#kittensPage {
+    background-color: rgb(199, 90, 109);
+}
+
+#puppiesPage {
+    background-color: rgb(205, 205, 114);
+}
+
+.heading {
+    font-size: 8vh;
+}
+
+button {
+    font-size: xx-large;
+    margin: 2rem;
+}
+
+.homePagePictureSection>img {
+width: 60vw;
+}
+
+#aboutImg {
+    width: 80vw;
+    border-radius: 0;
+    border: 6px double black;
+    margin-top: 4rem;
+}
+
+.kittenAndPuppyPics>img {
+    width: 30vw;
+}
+
+img {
+    margin:2vw;
+    border-radius: 50%;
+}
+
+main {
+    text-align: justify;
+    font-size: 1.5em;
+    margin-top: 2em;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    user-select: text;
+}
+
+footer {
+    font-size: 3.5vh;
+    margin-bottom: 1em;
+}
