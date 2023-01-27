@@ -1,0 +1,53 @@
+body {
+    background-color: azure;
+    margin-top: 0;
+    padding: 0;
+}
+
+header~main {
+    margin-top: 5em;
+}
+
+header {
+    text-align: center;
+    font-size: 3vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(240, 255, 255);
+}
+
+#top-image {
+    float: right;
+    height: 30em;
+    margin-left: .5em;
+}
+
+main {
+    font-size: xx-large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#bottom-image {
+    float: left;
+    height: 31.5em;
+    margin-right: .5em;
+}
+
+#bottom-image + main {
+    max-height: 30em;
+}
+
+#secondBlock {
+    height: 31.5em;
+    overflow: hidden;
+}
+
+footer {
+    height: 5em;
+    font-size: xx-large;
+    text-align: center;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column-reverse;
+}
