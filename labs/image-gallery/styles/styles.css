@@ -1,0 +1,72 @@
+body {
+    text-align: center;
+    background-color: pink;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    user-select: none;
+}
+
+#header-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(255, 105, 130);
+}
+header {
+    padding: 1.5rem 0rem 4vw 0rem;
+    font-size: 5vw;
+    font-style: italic;
+    
+}
+nav {
+    height: 6vw;
+}
+nav a {
+    background-color: rgb(254, 221, 227);
+    color: rgb(255, 105, 130);
+    border: solid lightgray 2px;
+    font-size: 1.75vw;
+    font-style: italic;
+    text-decoration: none;
+    padding: 1.5vw;
+    margin: .75vw;
+}
+
+nav a:hover, nav a:focus {
+    background-color: rgb(249, 163, 177);
+    color: white;
+}
+
+nav a:active {
+    background-color: rgb(255, 189, 201);
+    color: white;
+}
+
+#hero {
+    width: 80vw;
+    margin-top: 2vh;
+    border: solid black 2px;
+}
+
+#gallery {
+    display: grid;
+    width: 80.5vw; /* this almost prevents the need for grid, but grid aligns the columns a bit more neatly to the hero image, when paired with width: 80.5vw above */
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin: 2vw auto 2vw auto;
+    gap: 1.5vw;
+}
+
+#gallery * {
+    border: 2px solid black;
+    width: 25.25vw;
+    height: 20vw;
+}
+
+footer {
+    margin-top: 2rem;
+    font-size: 2vw;
+    margin-bottom: 2rem;
+    color: rgb(255, 105, 130);
+}
