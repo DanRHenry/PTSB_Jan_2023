@@ -211,4 +211,15 @@ let calc2 = (x, y) => {
     return x + y;
 }
 
-console.log(calc2(234, 1789))
+console.log(calc2(234, 1789));
+
+//* IIFE
+/* 
+    - Immediately Invoked Function Expression
+    - Helps allocating space in memory for anonymous functions
+    - fires our function as soon as it is read.
+*/
+
+(function () {
+    console.log("IIFE fired");
+  })();
