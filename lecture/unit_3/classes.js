@@ -64,10 +64,10 @@ console.log(itemOne);
 itemOne.name = "spinach";
 console.log(itemOne);
 
-let itemTwo = itemOne;
-itemTwo.name = "fish";
-console.log("itemTwo: ",itemTwo);
-console.log("itemOne: ", itemOne); // Like before, linking the two and then changing one changed both. Best create a new class.
+// let itemTwo = itemOne;
+// itemTwo.name = "fish";
+// console.log("itemTwo: ",itemTwo);
+//console.log("itemOne: ", itemOne); // Like before, linking the two and then changing one changed both. Best create a new class.
 // TypeError: Class constructor Item cannot be invoked without 'new'
 // let brokenItem = Item();
 // console.log(brokenItem); 
@@ -79,12 +79,95 @@ let iType = "tomato soup";
 let iDesc = "canned";
 let iCost = 1.29;
 
-let variable = ["squash", "broccoli", "papaya"]
+// let variable = ["squash", "broccoli", "papaya"]
 
 // Build a function to process items.
-function processItem(variable, itemName, desc, cost) {
-    return new variable(itemName, desc, cost);
+function processItem(itemName, desc, cost) {
+    return new Item(itemName, desc, cost);
 }
 
 let useFunction = processItem(iType, iDesc, iCost);
 console.log(useFunction);
+
+//* Methods
+// Generating/creating our own methods for use with our objects
+
+class DeptInventory {
+    constructor(dept) {
+        this.dept = dept;
+        this.items = []; // makes a default value for this key.
+    }
+    
+    //
+//         1          2
+    addToInventory(newItem) {
+    //   3          4
+        this.items.push(newItem);
+        console.log("An item was added!");
+        console.table(this.items);
+    }
+}
+
+// 5
+let dryGoods = new DeptInventory("Dry Goods");
+let itemTwo = new Item("corn", "canned", 0.79);
+
+// 6
+dryGoods.addToInventory(itemTwo);
+dryGoods.addToInventory(itemOne);
+console.log(dryGoods)
+
+/* 
+
+1: Establishing a name for our method
+2: This method requires a parameter.
+3: "This" keyword is referencing our "Dry Goods" object and adding to its array of items.
+4: Using an array method to push to the items array.
+5: Generating/creating a new dept object named dryGoods. Also creating a new item.
+6: Using dot notation to target our method within our dryGoods object and passing items to it.
+
+*/
+
+//* Factory Methods
+
+class Expense {
+    // static keyword, create/build a new expense
+    // only reachable within the class, itself. Not global
+    static addUpchargeForProfit(wholesale) {
+        // calculate the wholesale charge and store in a variable
+        let upcharge = wholesale + wholesale * 0.25;
+        // return (so it is accessible) the new expense
+        return new Expense(wholesale, upcharge);
+    }
+// basic constructor of key/value pairs
+    constructor(w, u) {
+        this.purchased_price = w;
+        this.sell_at = u;
+    }
+
+    // addTax method
+    addTax(x) {
+        // set x value to percentage variable
+        let percentage = x;
+        // set the value of sell_at to a variable
+        let saleCost = this.sell_at;
+
+        // Write and set the taxed cost
+        this.plus_sales_tax = (saleCost + saleCost * percentage).toFixed(2);
+    }
+}
+
+let itemToSell = Expense.addUpchargeForProfit(1);
+console.log(itemToSell);
+
+let anotherItemToSell = Expense.addUpchargeForProfit(2);
+console.log(anotherItemToSell);
+
+//* Class Inheritance
+// With each object we create, those methods are included to those specific objects, basically, the children inherit from the parent class.
+
+// anotherItem has the "addTax" method due to inheritance
+anotherItemToSell.addTax(0.075);
+console.log(anotherItemToSell);
+
+// anotherItemToSell.addUpchargeForProfit(3); TypeError: anotherItemToSell.addUpchargeForProfit is not a function // Note: that anything that is static will not be inherited into those new objects. For our itemToSell and anotherItem, we won't have access to the addUpchargeForProfit method. 
