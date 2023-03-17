@@ -55,13 +55,13 @@ removeElements(randomCard);
   title.className = "card-title";
   title.textContent = recipe.title;
   btn.className = "btn btn-success";
-  btn.textContent = "Add Recipe";
   btn.onclick = () => {
     // When the button is clicked, push the recipe object to storedRecipes array
     storedRecipes.push(recipe)
     // Run the display stored recipe function
     saveRecipeTable()
   }
+  btn.textContent = "Add Recipe";
 
   //* Attach Elements
   body.appendChild(title);
