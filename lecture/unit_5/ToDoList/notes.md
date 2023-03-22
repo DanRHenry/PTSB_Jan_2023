@@ -35,3 +35,20 @@ CRUD (Create, Read, Update, Delete)
 We are going to set up a controller folder and make our first controller file called practice.controller.js
 
 Sending a status code with a response is good practice for both the user and developer.
+
+## Postman
+- Set Methods
+  - GET / POST / PUT / DELETE depending on route
+  - Body, tab label under the URL
+    - raw (select the raw value radio button)
+    - JSON (blue dropdown to the right of the radio button)
+    - Make a JSON object (in the body area)
+
+---
+
+## Preparing our server to handle JSON objects
+In our `app.js` we need to have this line of code:
+```js
+app.use(express.json());
+```
+This provides us access JSON files throughout our routes.
