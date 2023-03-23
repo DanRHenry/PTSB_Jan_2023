@@ -1,3 +1,7 @@
+import placeholderQuestions from "./placeholder-questions.js";
+// console.log("main",placeholderQuestions)
+// console.log("main",placeholderQuestions[0])
+
 // Global DOM Variables
 let inputFieldForP1Name = document.getElementById("inputFieldForP1Name");
 let inputFieldForP2Name = document.getElementById("inputFieldForP2Name");
@@ -34,20 +38,11 @@ let textDisplayBtn = document.getElementById("textDisplayBtn");
 let nextRound = document.getElementsByClassName("nextRound")
 let placeholderNextRound = document.getElementsByClassName("placeholderNextRound")
 
-
 // Global Variables
-// Fetch Categories from jService API
-// const url = "https://jservice.io/api/clues?count=100";
-let randomURL = "https://jservice.io/api/random?count=100"
-let categoryURL = "https://jservice.io/api/category?id=";
-let data;
-let answer;
-let question;
-let category;
+
 // const categoryArray = [];
-const questionArray = [];
-let _200Answer = "This man had a pet monkey named George."
-let _200Question = "asdf"
+const questionArray200 = [];
+const answerArray200 = [];
 // let _200Answer = "This man had a pet monkey named George."
 // let _200Question = "The Man with the Yellow Hat"
 let playerGuess;
@@ -59,35 +54,29 @@ let playerOnesName;
 let playerTwosName;
 let passed;
 let activePlayerScore;
+let randomCategories;
+let activePlayer;
+let categoryArray = [];
 
 //! Event Listeners
-// Change answer grid cell upon click
-//! https://stackoverflow.com/questions/45907673/clickable-tiles-with-css-grid
-window.addEventListener("DOMContentLoaded", function() {
-    let boxes = document.querySelectorAll(".answer");
-    Array.from(boxes, function(box) {
-        box.addEventListener("click", function() {
-            activateButtons()
-            box.textContent = "";
-            box.style.visibility = "hidden";
-            textDisplay.style.display = "block";
-            textDispCont.textContent = _200Answer;
-        });
-    });
-});
 
-//! Sloppy fix applied and commented back in (index.html)
+
+//! Sloppy fix applied and commented back in (index.html) probably a scope issue
 passBtn.addEventListener("click", function listener() {
         if (passed == undefined || passed == false) {
-        console.log("passed value:", passed)
-        console.log("I'll Pass Thank you")
-        displayPlayerTurnMessage()
-        passed = true;
-        console.log("passed value:",passed)
+            passed = true;
+            switchPlayer();
+            displayPlayerTurnMessage();
+            console.log("passed value:",passed)
         } else {
-        switchPlayer()
-        console.log("can't pass anymore")
-        console.log("passed value:",passed)
+            console.log("passed value:",passed);
+            // Display the close button
+            textDispCont.textContent = (`You should have guessed ${_200Question}.`);
+
+            showTextDisplayBtn();
+
+            // Display the text of the question (answer)
+
 // Change to close the window and the question.
     }
 })
@@ -95,7 +84,7 @@ passBtn.addEventListener("click", function listener() {
 
 // Create round 1, 2 and 3 functions, triggered by an if statement that looks for the name of the title to avoid the DOM variables getting messed up by missing ids.
 
-//! Global Functions
+//! Global Functions & Event Listeners
 
 // Get Player Names on the Title Screen
 async function titleScreen(){
@@ -103,16 +92,22 @@ async function titleScreen(){
 
 playBtn.addEventListener("click", saveName);
 
-
 // Grab input from the player name field, and set it to the local storage
 function saveName() {
     let player1Name = inputFieldForP1Name.value;
     let player2Name = inputFieldForP2Name.value;
-
     localStorage.setItem("playerOneName", player1Name);
     localStorage.setItem("playerTwoName", player2Name);
+    }
+
+// await fetchRandomCategories();
 }
-}
+
+// function saveRandomCategories() {
+//     console.log("here", randomCategories)
+//     localStorage.setItem("randomCategories", randomCategories);
+//     // console.log("localstoragerandomcats",localStorage.randomCategories)
+//     }
 
 // Disable the pass and guess buttons / enable the placeholder pass and guess buttons
 function deactivateButtons() {
@@ -174,72 +169,95 @@ function getNamesAndScoreboardInfo(){
     } else {
         playerTwoScoreName.innerText = "Player 2's Score";
         playerTwosName = "Player 2's";
-    }
-    
+    }   
     p1Score.textContent = player1Score;
     p2Score.textContent = player2Score;
     activePlayer = playerOnesName;
-
-}
-let randomResultArray = [];
-// Fetch Information For the Answer Board
-let fetchRandomCategories = async () => {
-    let res = await fetch(randomURL); // Passing our file location
-    let result = await res.json();
-    // let data = result.data;
-    data = result;
-    for (let i = 0; i < 6; i++ && randomResultArray.length < 6) {
-        if (data[i].category.clues_count > 6 && randomResultArray < 6) {
-        randomResultArray.push(data[i].category_id)
-        } else {
-            fetchRandomCategories()
-        }
-    }
-    // console.log("In Async/await", data)
-    console.log(randomResultArray);
-    // fetchAnswers();
 }
 
-// fetchRandomCategories()
-let fetchAnswers = async () => {
-    for (let i = 0; i < randomResultArray.length; i++) {
-    let res = await fetch(categoryURL+(i+1)); // Passing our file location
-    let result = await res.json();
-    // let data = result.data;
-    data = result;
-    questionArray.push(data)
-    }
-    console.log("questionArray:",questionArray)
-}
+// let randomResultArray = [];
+// // Fetch Information For the Answer Board
+// let fetchRandomCategories = async () => {
+//     let res = await fetch(randomURL); // Passing our file location
+//     let result = await res.json();
+//     // let data = result.data;
+//     randomCategories = result;
+//     saveRandomCategories()
+// }
+
+console.log(placeholderQuestions)
+
+// let randomResultArray = [];
+// // Fetch Information For the Answer Board
+// let fetchRandomCategories = async () => {
+//     let res = await fetch(randomURL); // Passing our file location
+//     let result = await res.json();
+//     // let data = result.data;
+//     randomCategories = result;
+//     saveRandomCategories()
+// }
+
+//     for (let i = 0; randomResultArray.length < 6; i++) {
+//         if (data[i].category.clues_count >= 6 && randomResultArray < 6) {
+//         randomResultArray.push(data[i].category_id)
+//         } else {
+//         //     break;
+//         }
+//         console.log(data)
+//     }
+//     // console.log("In Async/await", data)
+//     console.log(randomResultArray);
+//     // fetchAnswers();
+// }
+
+// let fetchAnswers = async () => {
+//     for (let i = 0; i < randomResultArray.length; i++) {
+//     let res = await fetch(categoryURL+(i+1)); // Passing our file location
+//     let result = await res.json();
+//     // let data = result.data;
+//     data = result;
+//     questionArray.push(data)
+//     }
+//     console.log("questionArray:",questionArray)
+// }
 // Notify that it is player 1's turn to choose
 function displayPlayerTurnMessage() {
     playerTurn.innerText = `${activePlayer} Turn. Pick an Answer!`; 
 }
 
+// Activate Close Button
+function showTextDisplayBtn() {
+    textDisplayBtn.style.display = "inline-block"
+}
+
 // Switch Players
 function switchPlayer() {
     if (activePlayer == playerOnesName) {
+        console.log("before switch",activePlayer);
         activePlayer = playerTwosName
+        console.log("after switch",activePlayer)
+        displayPlayerTurnMessage()
     } else if (activePlayer == playerTwosName) {
+        console.log("before switch", activePlayer)
         activePlayer = playerOnesName
+        console.log("after switch", activePlayer)
+        displayPlayerTurnMessage()
     }
-    displayPlayerTurnMessage()
 }
 
 function setActivePlayerScore() {
-    console.log("activePlayer:",activePlayer);
-    console.log("playerOnesName:", playerOnesName);
     if (activePlayer == playerOnesName) {
-        console.log("a")
+        // console.log("a")
         activePlayerScore = player1Score;
-        console.log("activePlayerScore:",activePlayerScore)
-        console.log("player1Score",player1Score)
+        // console.log("activePlayerScore:",activePlayerScore)
+        // console.log("player1Score",player1Score)
     } else if (activePlayer == playerTwosName) {
-        console.log("b")
+        // console.log("b")
         activePlayerScore = player2Score;
-        console.log("activePlayerScore:",activePlayerScore)
-        console.log("player2Score",player2Score)
+        // console.log("activePlayerScore:",activePlayerScore)
+        // console.log("player2Score",player2Score)
     }
+    console.log("Active Player's Score:",activePlayerScore)
 }
 
 // let fetchCategories = async () => {
@@ -249,6 +267,7 @@ function setActivePlayerScore() {
 //     category = result;
 //     console.log("categoryresult",category)
 // }
+
 
 //!Sloppy fix applied and commented back in
 textDisplayBtn.addEventListener("click", function() {
@@ -268,6 +287,18 @@ displayPlayerTurnMessage()
 
 // Get Answers for the answerboard
 //! Reactivate this after looking into the loop
+// if (!localStorage.randomCategories) {
+//     await fetchRandomCategories()
+//     console.log(localStorage)
+// }
+
+// randomCategories = JSON.parse(localStorage.getItem('randomCategories'));
+// console.log(randomCategories);
+
+
+// data = localStorage.randomCategories;
+// console.log(randomCategories);
+// console.log("fruit")
 // fetchRandomCategories();
 // fetchCategories();
 //? Jeopardy Game
@@ -284,89 +315,156 @@ displayPlayerTurnMessage()
 
 // Guess Button Event Listener
 guessBtn.addEventListener("click", function() {
-    console.log("lemme guess");
     playerGuess = inputFieldForAnswer.value;
-    // playerGuessArray
     let pgArray = [];
     pgArray.push(playerGuess);
-    // pgArray = pgArray.split(" ");
     // Added after turning in. Changes input text to lowercase
-    pgArray = pgArray.map(item => item.toLowerCase()); 
+    pgArray = pgArray.map(item => item.toLowerCase());
 
     //_200QuestionArray
     let qArray = [];
     qArray.push(_200Question);
-    // qArray = qArray.split(" ");
     // Added after turning in. Changes input text to lowercase
-    qArray = qArray.map(item => item.toLowerCase()); 
-    // console.log("pgArray:",pgArray)
-    // console.log("qArray:",qArray)
-
+    qArray = qArray.map(item => item.toLowerCase());
     // if (pgArray == qArray) {
-
     for (item of qArray) {
         if (pgArray.includes(item)) {
             win = true;
         } else {
             win = false;
             switchPlayer()
+            console.log("broken")
             break;
         }
     }
         if (win == true) {
+            console.log("win = ", win)
+            // Display Congratulations Message
             textDispCont.textContent = "Congratulations, you answered correctly!"
             // Display the button to close the window
-            textDisplayBtn.style.display = "inline-block"
+            showTextDisplayBtn()
+            // Make sure the targetted scoreboard is the active player's scoreboard
             setActivePlayerScore()
-            console.log(activePlayerScore)
+            console.log("Winner's Score Before:", activePlayerScore)
             activePlayerScore += 200; //! Change this to reflect the actual amount
-            p1Score.textContent = player1Score;
-            p2Score.textContent = player2Score;
+            console.log("Winner's Score After:", activePlayerScore)
+            //! Change this to check whose turn it is and update the correct score (p1Score or p2Score)
+            p1Score.textContent = activePlayerScore;
+            player1Score = Number(p1Score.textContent);
+            player2Score = Number(p2Score.textContent);
+
+            // p2Score.textContent = player2Score;
             deactivateButtons();
         } else if (win == false) {
             if (passed == false || passed == undefined) {
-                textDispCont.textContent = `Wrong answer. ${activePlayer}, would you like to play?`
                 setActivePlayerScore()
-                console.log(activePlayer)
-                console.log(activePlayerScore);
-                activePlayerScore -= 200;
-                p1Score.textContent = player1Score;
-                p2Score.textContent = player2Score;
+                textDispCont.textContent = `Wrong answer. ${activePlayer}, would you like to play or pass?`
+                activePlayerScore -= 200; //! Change this to reflect the actual amount
+                p1Score.textContent = activePlayerScore;
+                player1Score = Number(p1Score.textContent);
+                player2Score = Number(p2Score.textContent);
                 passed = true;
+                console.log("passedFalse - activePlayer: ",activePlayer);
                 switchPlayer();
+                setActivePlayerScore()
                 setTimeout(() => {
                     textDispCont.textContent = _200Answer;
                 }, 2000);
-                // this.function()
-                // deactivateButtons();
-                // hideCloseBtn();
                 } else {
-                switchPlayer();
-                setActivePlayerScore()
+                setActivePlayerScore();
                 textDispCont.textContent = `I'm sorry, ${activePlayer} that's the wrong answer.`
-                activePlayerScore -= 200;
-                p1Score.textContent = player1Score;
-                p2Score.textContent = player2Score;
+                activePlayerScore -= 200; //! Change this to reflect the actual amount
+                p1Score.textContent = activePlayerScore;
+                player1Score = Number(p1Score.textContent);
+                player2Score = Number(p2Score.textContent);
+                console.log("passedTrue - activePlayer: ",activePlayer);
+                switchPlayer();
+                deactivateButtons();
                 setTimeout(() => {
                     textDisplay.style.display = "none";
-                    deactivateButtons();
                     hideCloseBtn();
-                    
                 }, 2000);
             }
         }
-    })
+})
+console.log(categoryArray)
+console.log(questionArray200)
+console.log(answerArray200)
 
 //!Round One Answer board DOM
 
-// Fill Round One Answer Board
+
+
+class Category {
+    constructor(category, q200, a200, q400, a400, q600, a600, q800, a800, q1000, a1000) {
+          this.category = category; // Location on map
+          this.q200 = q200; // wordy description from looking around
+          this.a200 = a200; 
+          this.q400 = q400;
+          this.a400 = a400;
+          this.q600 = q600;
+          this.a600 = a600;
+          this.q800 = q800;
+          this.a800 = a800;
+          this.q1000 = q1000;
+          this.a1000 = a1000;
+    }
+  }
+
+for (let i = 0; i < 60; i+10){
+    let name = (`_${i}`)
+    // console.log(name)
+    name = new Category (placeholderQuestions[i].question, placeholderQuestions[i].answer);
+    // console.log(name)
+}
+console.log(_1)
+// Fill Round One Answer Board and populate the answer arrays
 
 for (let i = 0; i < 6; i++) {
-    // answer200.id = `answerBtn${i + 1}`;
+    // Populate Categories, points, and clues
+    // questionArray.push(placeholderQuestions[i].question);
+    // answerArray.push(placeholderQuestions[i].answer);
     answer200.className = `answer`;
     answer200.textContent = `$200`;
-    answer200.id = `answer200${i}`
+    answer200.id = `answer200`+i
     answerBoard.appendChild(answer200.cloneNode(true));
+    answerArray200.push(placeholderQuestions[i].answer);
+    questionArray200.push(placeholderQuestions[i].question);
+    categoryArray.push(placeholderQuestions[i].category);
+    // Change answer grid cell upon click
+//! https://stackoverflow.com/questions/45907673/clickable-tiles-with-css-grid
+window.addEventListener("DOMContentLoaded", function() {
+    let boxes = document.getElementById(`answer200${i}`);
+    Array.from(boxes, function(box) {
+        box.addEventListener("click", function() {
+            activateButtons()
+            box.textContent = answer200+i;
+            box.style.visibility = "hidden";
+            textDisplay.style.display = "block";
+            // textDispCont.textContent = (questionArray200[i].category);
+        });
+    });
+});
+// window.addEventListener("DOMContentLoaded", function() {
+//     let boxes = document.querySelectorAll(".answer");
+//     Array.from(boxes, function(box) {
+//         box.addEventListener("click", function() {
+//             activateButtons()
+//             box.textContent = "";
+//             box.style.visibility = "hidden";
+//             textDisplay.style.display = "block";
+
+//             let answer = (placeholderQuestions[i].answer);
+//             console.log("answer",answer);
+//             let question = (placeholderQuestions[i].question);
+//             console.log("question",question);
+//             let category = (placeholderQuestions[i].category);
+//             console.log("category",category);
+
+//             textDispCont.textContent = question;
+//         });
+//     });
+// });
 }
 
 for (let i = 0; i < 6; i++) {
