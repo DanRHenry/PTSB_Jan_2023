@@ -6,12 +6,24 @@ const app = express(); // simplifies our method calls
 // Server port w/in localhost. Using "all caps" indicates a "general" variable.
 const PORT = 4000;
 
-//! Where does this go?
+// --------------------- Required File Paths ---------------------
+
 const practiceController = require(`./controller/practice.controller`);
+// Importing in the auth controller routes for the app's use/reference
+const auth = require("./controller/auth.controller");
+// Require in the index.js from helpers(./helpers) w/object destructuring
+const { logTime } = require('./helpers');
+
+// ------------- App Functionality/ What it does next
+// Telling the express app to first use this middleware function
+app.use(logTime);
 
 // Provide us access to use JSON within our routes
 // call on our app var, use the .use() method to tell our app: express.json() (use JSON please express)
 app.use(express.json());
+
+// parses the body (of the request) from our browser so it can display the response.
+app.use(express.urlencoded())
 
 // Use a method called .use(), this points our express app to where it should go.
 // Call the app variable, use the .use() method, specify using express to target the public folder, note: when a file is not specified, JS always defaults to seeking an index file (any file titled index, if it's not provided one).
@@ -21,12 +33,15 @@ console.log('pathway: ', __dirname); // routes us to the public folder.
 
 // Building route to practice controller (gives app.js access to it)
 // First we will call on our app var, then we will use the .use() method, we pass use a string that becomes the url route and the controller that route takes you to.
-app.use("/practice", practiceController);
 
 /* 
-    Any traffic
+    Any traffic coming in that has "practice" after localhost:4000 will route to practicecontroller.js.
+    ex: localhost:4000/practice
 */
+app.use("/practice", practiceController);
 
+// Building route to auth controller: http://localhost:4000/todo
+app.use("/todo", auth);
 
 
 // Create a method that "listens" for us spinning up/starting our application.

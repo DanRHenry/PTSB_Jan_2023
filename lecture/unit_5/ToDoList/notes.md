@@ -60,3 +60,13 @@ This provides us access JSON files throughout our routes.
 - View: browser, Postman, etc.
   - Application that interface with the server.
 - Controller: Part of the server application which handles logic. (How we build our logic within the server, we code and create what routes can be used and what they do.)
+
+---
+
+...
+## Middleware
+- A function that accesses the request and response
+- Has a call stack
+  - request
+  - response
+  - next
