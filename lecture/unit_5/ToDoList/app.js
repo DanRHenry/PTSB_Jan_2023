@@ -1,4 +1,4 @@
-// Access Express & its methods; we can do that via require()
+//! Access Express & its methods; we can do that via require()
 const express = require("express"); // being pulled from the node modules
 // We want a simple var to make calls, set express to app
 const app = express(); // simplifies our method calls
@@ -6,15 +6,17 @@ const app = express(); // simplifies our method calls
 // Server port w/in localhost. Using "all caps" indicates a "general" variable.
 const PORT = 4000;
 
-// --------------------- Required File Paths ---------------------
+//! --------------------- Required File Paths ---------------------
 
 const practiceController = require(`./controller/practice.controller`);
 // Importing in the auth controller routes for the app's use/reference
 const auth = require("./controller/auth.controller");
+
+const routes = require("./controller/routes.controller")
 // Require in the index.js from helpers(./helpers) w/object destructuring
 const { logTime } = require('./helpers');
 
-// ------------- App Functionality/ What it does next
+//! ------------- App Functionality/ What it does next
 // Telling the express app to first use this middleware function
 app.use(logTime);
 
@@ -40,8 +42,11 @@ console.log('pathway: ', __dirname); // routes us to the public folder.
 */
 app.use("/practice", practiceController);
 
-// Building route to auth controller: http://localhost:4000/todo
+//! Building route to auth controller: http://localhost:4000/todo
 app.use("/todo", auth);
+
+//! Route to routes controller: http://localhost:4000/routes
+app.use("/routes", routes);
 
 
 // Create a method that "listens" for us spinning up/starting our application.
@@ -49,6 +54,6 @@ app.use("/todo", auth);
 // First call our app var, use the .listen method, pass that method the port var and create a CB func to give us some feedback (console.log) to affirm that it's running.
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
-})
+});
 
 // To start server, in terminal at the project directory(the folder) run command "nodemon"
