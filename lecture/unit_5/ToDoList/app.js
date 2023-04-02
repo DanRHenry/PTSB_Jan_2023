@@ -16,6 +16,9 @@ const routes = require("./controller/routes.controller")
 // Require in the index.js from helpers(./helpers) w/object destructuring
 const { logTime } = require('./helpers');
 
+// Create a variable to require in and have CORS dependency accessible.
+const cors = require("cors");
+
 //! ------------- App Functionality/ What it does next
 // Telling the express app to first use this middleware function
 app.use(logTime);
@@ -25,7 +28,11 @@ app.use(logTime);
 app.use(express.json());
 
 // parses the body (of the request) from our browser so it can display the response.
-app.use(express.urlencoded())
+app.use(express.urlencoded());
+
+// Runs the cors preflight request prior to hitting our endpoint/routes
+// Allows all CORS requests (*)
+app.use(cors());
 
 // Use a method called .use(), this points our express app to where it should go.
 // Call the app variable, use the .use() method, specify using express to target the public folder, note: when a file is not specified, JS always defaults to seeking an index file (any file titled index, if it's not provided one).

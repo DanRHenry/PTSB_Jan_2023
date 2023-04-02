@@ -70,3 +70,21 @@ This provides us access JSON files throughout our routes.
   - request
   - response
   - next
+
+
+  ---
+
+  ## CORS
+
+  - Cross Origin Resource Sharing
+  - https://www.npmjs.com/package/cors
+  
+    - preFlight action:
+      - Checks to see what options are available for any type of request PRIOR to our routes being triggered. (Checks to see if your request is available.)
+      - If headers do not match in our request: it can throw an error.
+      - Adding this dependency (any external resource a program needs to work, ex an external library or service functionality) to our project can help resolve any of those issues: help our application handle any potential error throughout our build process
+
+  - Dependency
+    - stop server and install as a dependency
+    - ```npm i cors```
+    - import within ```app.js``` above ```routes```.
