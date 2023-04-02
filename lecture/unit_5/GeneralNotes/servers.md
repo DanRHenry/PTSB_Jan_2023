@@ -60,6 +60,7 @@ A web framework for Node.js
 - This tells our local repository to ignore the node_modules folder when we push and backup our code to GitHub
 - When cloning down a project that ignores items: run the command "npm install" to acquire all dependencies/files needed.
 
+4. To double check that we can use the command "nodemon" to start the server, run the command `npm install --save-dev nodemon`
 ---
 
 ## API vs. Server
