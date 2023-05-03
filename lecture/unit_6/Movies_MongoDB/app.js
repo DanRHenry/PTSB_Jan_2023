@@ -6,9 +6,12 @@ const app = express();
 const PORT = process.env.PORT;
 const log = console.log;
 
-// --------------------- Controllers: -------------------
+// ---------------------- Controllers: -------------------
 const users = require("./controllers/user.controller");
 const movies = require("./controllers/movie.controller");
+
+// ----------------------- Middleware: --------------------
+const validateSession = require("./middleware/validate-session")
 
 // Require in the mongoose middleware, pulled/used from node_modules
 const mongoose = require("mongoose");
@@ -37,6 +40,10 @@ app.use(express.json());
 // -------------------------- Routes to Controllers--------------
 // http://localhost:4000/user
 app.use("/user", users);
+
+// One way to implement validate session, directly in app.js:
+// So all routes below will require validation (loggen in user, with valid token) when used this way.
+// app.use(validateSession); // Commented out. This was the first way of implementing session validation.
 
 // http://localhost:4000/movies
 app.use("/movies", movies);
