@@ -6,6 +6,7 @@ import AboutMe from './components/aboutMe/AboutMe'
 import Footer from './components/footer/Footer'
 // The Div here is the one parent container that is returned with react.
 import Employees from './components/employeeInformation/Employees';
+import PresidentVotes from './components/Presidents/PresidentVotes';
 // This is a functional component: it is declared with the function keyword, the name of the function is the component name (capitalized / PascalCase)
 function App() {
   // Functional Components have a single return
@@ -19,6 +20,7 @@ function App() {
       {/* <EmployeeInfo name="Gloria" />
       <EmployeeInfo name="Catalonia" />
       <EmployeeInfo name ="Salem" /> */}
+      <PresidentVotes />
       <Footer />
     </div>
   );
