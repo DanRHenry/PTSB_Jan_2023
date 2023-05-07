@@ -8,6 +8,8 @@ function EmployeeInfo(props) {
             <ul style={{listStyleType: "none", textAlign: "left"}}> 
             {/* Why do we use double curly braces in React?
 Curly braces { } are special syntax in JSX. It is used to evaluate a JavaScript expression during compilation. A JavaScript expression can be a variable, function, an object, or any code that resolves into a value. */}
+
+{/* To get rid of the key error, check this out: https://react.dev/learn/rendering-lists#filtering-arrays-of-items */}
                 <li>From {props.city}, {props.state}</li>
                 <li>Position: {props.position}</li>
                 <li>Favorite Food: {props.food}</li>
