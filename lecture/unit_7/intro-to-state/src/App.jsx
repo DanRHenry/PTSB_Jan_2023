@@ -4,13 +4,14 @@ import "./App.css";
 import Nav from "./components/nav/Nav";
 import Welcome from "./components/welcome/Welcome";
 import Counter from "./components/counter/Counter";
+import AddUser from "./components/addUser/AddUser";
 function App() {
   // const name = "Georgina"
 
+  // const [count, setCount] = useState(0)
   // keyword [ variable, function ] = hook(initial value);
   // const [name, setName] = useState ("Frodo");
-  const [names, setName] = useState(["Frodo", "Sam", "Pippin", "Merri"]);
-  const [count, setCount] = useState()
+  const [names, setName] = useState([]);
   // Build a function that will map and display a welcome per hobbit (this will return a welcome component per hobbit)
   const displayWelcome = () => {
     return names.map((name, index) => {
@@ -26,6 +27,7 @@ function App() {
         />;
     });
   };
+
   // const displayNumber = () => {
 
   // }
@@ -33,8 +35,17 @@ function App() {
   return (
     <div className="App">
       <Nav />
+      {/* names = {names}, etc, are the props */}
       {/* <Welcome name ={name}/> was replaced by the mapping function above*/}
-      {displayWelcome()}
+      {
+        names.length > 0 ?
+        displayWelcome() :
+        <div>
+        <h1 style={{textAlign: "center"}}>Add a New User!</h1>
+          <AddUser names = {names} setName = {setName}/>
+        </div>
+      }
+      
       <Counter />
     </div>
   );

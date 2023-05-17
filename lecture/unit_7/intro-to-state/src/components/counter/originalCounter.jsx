@@ -16,8 +16,8 @@ function decrementCounter() {
   return (
     <div className='counter'>
         <button onClick={incrementCounter}>+</button>
-        <button onClick={decrementCounter}>-</button>
         <span>{countState}</span>
+        <button onClick={decrementCounter}>-</button>
     </div>
   )
 }
