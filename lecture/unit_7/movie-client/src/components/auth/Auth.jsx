@@ -1,20 +1,29 @@
 // import React from 'react'
 // Signup is child of Auth.jsx, import below
-import Signup from './signup/Signup'
+import Signup from "./signup/Signup";
+import Login from "./login/Login";
 // Container is Reactstrap's resizing div w/ grid rows and columns
 // https://getbootstrap.com/docs/5.3/layout/grid/ (change class to className in jsx)
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row } from "reactstrap";
 
 export default function Auth() {
   return (
     <>
-    <Container >
-                <Row>
-                    <Col md="6">
-                        <Signup />
-                    </Col>
-                </Row>
-            </Container>
+      <Container>
+        <Row>
+          <Col md="6">
+            <Signup />
+          </Col>
+          <Col md="6">
+            <Login />
+          </Col>
+        </Row>
+        {/* <Row>
+          <Col md="6">
+            <Login />
+          </Col>
+        </Row> */}
+      </Container>
     </>
-  )
+  );
 }
