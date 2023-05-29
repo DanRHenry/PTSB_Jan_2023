@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-export default function Logout(setToken) {
+export default function Logout({setToken}) {
     const navigate = useNavigate();
     // Build a signout function
     const signout = () => {
