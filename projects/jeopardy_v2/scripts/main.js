@@ -185,7 +185,12 @@ function getNamesAndScoreboardInfo(){
 //     saveRandomCategories()
 // }
 
-console.log(placeholderQuestions)
+console.log("placeholderQuestions: ", placeholderQuestions)
+
+// placeholderQuestions.map(q => {
+    
+// })
+
 
 // let randomResultArray = [];
 // // Fetch Information For the Answer Board
@@ -301,6 +306,8 @@ displayPlayerTurnMessage()
 // console.log("fruit")
 // fetchRandomCategories();
 // fetchCategories();
+
+
 //? Jeopardy Game
 // In this project, we will be completing the functionality for our Jeopardy / quiz game utilizing what we learned this week!
 
@@ -387,37 +394,23 @@ guessBtn.addEventListener("click", function() {
             }
         }
 })
-console.log(categoryArray)
-console.log(questionArray200)
-console.log(answerArray200)
+// console.log(categoryArray)
+// console.log(questionArray200)
+// console.log(answerArray200)
 
 //!Round One Answer board DOM
-
-
-
-class Category {
-    constructor(category, q200, a200, q400, a400, q600, a600, q800, a800, q1000, a1000) {
-          this.category = category; // Location on map
-          this.q200 = q200; // wordy description from looking around
-          this.a200 = a200; 
-          this.q400 = q400;
-          this.a400 = a400;
-          this.q600 = q600;
-          this.a600 = a600;
-          this.q800 = q800;
-          this.a800 = a800;
-          this.q1000 = q1000;
-          this.a1000 = a1000;
-    }
-  }
-
-for (let i = 0; i < 60; i+10){
-    let name = (`_${i}`)
-    // console.log(name)
-    name = new Category (placeholderQuestions[i].question, placeholderQuestions[i].answer);
-    // console.log(name)
-}
-console.log(_1)
+let questionArray = []
+let answerArray = []
+console.log("placeholder category 0",placeholderQuestions[0].category)
+// for (let i = 0; i < 60; i+10){
+//     // let name = (`_${i}`)
+//     // console.log(name)
+//     questionArray[i].question = placeholderQuestions[i].category 
+//     answerArray[i].answer = placeholderQuestions[i].question
+//     // console.log(name)
+// }
+console.log("questionArray",questionArray)
+console.log("answerArray:",answerArray)
 // Fill Round One Answer Board and populate the answer arrays
 
 for (let i = 0; i < 6; i++) {
@@ -467,6 +460,7 @@ window.addEventListener("DOMContentLoaded", function() {
 // });
 }
 
+// console.log("categoryArray",categoryArray)
 for (let i = 0; i < 6; i++) {
     // answer400.id = `answerBtn${i + 1}`;
     answer400.className = `answer`;
@@ -601,70 +595,4 @@ for (let i = 0; i < 6; i++) {
 // Then the board has questions fetched from an external API
 }
 
-//! Round Two Function
-async function roundTwo (){
-    
-    // Fill in Name(s) and Scoreboard Info
-    getNamesAndScoreboardInfo();
-
-// Get Answers for the Answerboard
-    fetchRandomCategories();
-
-    // playerTurn.innerText = `${playerOnesName} Turn. Pick an Answer!`; // (Insert player's turn here)
-
-// Guess Button Event Listener
-guessBtn.addEventListener("click", function() {
-    console.log("lemme guess")
-})
-
-    // Fill Round Two Answer Board
-    for (let i = 0; i < 6; i++) {
-        // answer400.id = `answerBtn${i + 1}`;
-        answer400.className = `answer`;
-        answer400.textContent = `$400`;
-        answerBoard.appendChild(answer400.cloneNode(true));
-    }
-
-    for (let i = 0; i < 6; i++) {
-        // answer800.id = `answerBtn${i + 1}`;
-        answer800.className = `answer`;
-        answer800.textContent = `$800`;
-        answerBoard.appendChild(answer800.cloneNode(true));
-    }
-
-    for (let i = 0; i < 6; i++) {
-        // answer1200.id = `answerBtn${i + 1}`;
-        answer1200.className = `answer`;
-        answer1200.textContent = `$1,200`;
-        answerBoard.appendChild(answer1200.cloneNode(true));
-    }
-
-    for (let i = 0; i < 6; i++) {
-        // answer1600.id = `answerBtn${i + 1}`;
-        answer1600.className = `answer`;
-        answer1600.textContent = `$1,600`;
-        answerBoard.appendChild(answer1600.cloneNode(true));
-    }
-
-    for (let i = 0; i < 6; i++) {
-        // answer2000.id = `answerBtn${i + 1}`;
-        answer2000.className = `answer`;
-        answer2000.textContent = `$2,000`;
-        answerBoard.appendChild(answer2000.cloneNode(true));
-    }
-
-}
-
-if (roundName[0].innerText == "Jeopardy!") {
-    titleScreen();
-}
-else if (roundName[0].innerText == "Round One") {
-    roundOne()
-} 
-else if ((roundName[0].innerText == "Double Jeopardy")) {
-    roundTwo()
-} 
-// else if ((roundName[0].innerText == "Final Jeopardy")) {
-//     round3()
-// }
-// roundOne()
+roundOne()
